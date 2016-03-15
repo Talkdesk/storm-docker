@@ -1,13 +1,16 @@
 storm-docker
 ============
 
-Dockerfiles for building a storm cluster. Inspired by [https://github.com/ptgoetz/storm-vagrant](https://github.com/ptgoetz/storm-vagrant)
-
-The images are available directly from [https://index.docker.io](https://index.docker.io)
+Dockerfiles for building a storm cluster. Inspired by [https://github.com/wurstmeister/storm-docker](https://github.com/wurstmeister/storm-docker)
 
 ##Pre-Requisites
 
 - install docker-compose [http://docs.docker.com/compose/install/](http://docs.docker.com/compose/install/)
+
+
+##Building
+
+- ```rebuild.sh```
 
 ##Usage
 
@@ -19,20 +22,18 @@ Destroy a cluster:
 
 - ```docker-compose stop```
 
-Add more supervisors:
+Add 3 more supervisors:
 
 - ```docker-compose scale supervisor=3```
 
-##Building
-
-- ```rebuild.sh```
+(more can be added)
 
 ##FAQ
 ### How can I access Storm UI from my host?
 Take a look at docker-compose.yml:
 
     ui:
-      image: wurstmeister/storm-ui:0.9.2
+      image: talkdesk/storm-ui:0.10.0
 	      ports:
 	        - "49080:8080"
 
