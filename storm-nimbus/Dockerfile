@@ -8,4 +8,11 @@ EXPOSE 6627
 EXPOSE 3772
 EXPOSE 3773
 ADD start-supervisor.sh /usr/bin/start-supervisor.sh
-CMD /usr/bin/start-supervisor.sh
+
+ADD topology.jar /topology.jar
+
+EXPOSE 5555
+
+CMD (sleep 30; storm jar /topology.jar com.talkdesk.storm.examples.zmq.TopologyMain &> /LOL.txt) & echo LOL & /usr/bin/start-supervisor.sh
+
+# CMD /usr/bin/start-supervisor.sh
