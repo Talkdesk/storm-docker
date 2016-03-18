@@ -1,4 +1,5 @@
 FROM wurstmeister/base
+ENV DEBIAN_FRONTEND noninteractive
 
 MAINTAINER Talkdesk 
 
@@ -13,5 +14,32 @@ ADD storm.yaml $STORM_HOME/conf/storm.yaml
 ADD cluster.xml $STORM_HOME/logback/cluster.xml
 ADD config-supervisord.sh /usr/bin/config-supervisord.sh
 ADD start-supervisor.sh /usr/bin/start-supervisor.sh 
+
+# Installs ZeroMQ 4
+RUN apt-get update
+RUN apt-cache search libsodium
+RUN apt-get install -y build-essential git pkg-config libtool autoconf autogen automake default-jdk
+
+RUN mkdir trash
+
+RUN cd /trash && git clone https://github.com/jedisct1/libsodium.git
+RUN cd /trash/libsodium && git checkout && ./autogen.sh
+RUN cd /trash/libsodium && ./configure && make && make check && make install
+
+RUN cd /root && wget http://download.zeromq.org/zeromq-4.1.4.tar.gz
+RUN cd /root && tar xzvf zeromq-4.1.4.tar.gz
+RUN cd /root/zeromq-4.1.4 && ./configure && make && make install
+
+# Installs J-ZeroMQ natives
+RUN cd trash && git clone https://github.com/zeromq/jzmq.git
+RUN cd trash/jzmq/jzmq-jni && ./autogen.sh 
+RUN cd trash/jzmq/jzmq-jni && ./configure  
+RUN cd trash/jzmq/jzmq-jni && make
+RUN cd trash/jzmq/jzmq-jni && make install
+
+RUN rm -rf trash
+
+# Set path for Java System.loadLibrary() function to detect the file (java.library.path)
+ENV LD_LIBRARY_PATH /usr/local/lib/
 
 RUN echo [supervisord] | tee -a /etc/supervisor/supervisord.conf ; echo nodaemon=true | tee -a /etc/supervisor/supervisord.conf
