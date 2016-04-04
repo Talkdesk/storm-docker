@@ -1,5 +1,6 @@
 #!/bin/sh
-if [ -f "SETUP_OK" ] then
+if [ -f "SETUP_OK" ]
+then
 	echo "Everything is installed already."
 else
 	sh install.sh
@@ -9,4 +10,4 @@ else
 fi
 
 cd storm-supervisor; docker-compose up -d
-docker-compose logs -f
+cd storm-supervisor; docker-compose logs -f
