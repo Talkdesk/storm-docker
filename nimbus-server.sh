@@ -11,4 +11,4 @@ else
 fi
 
 cd storm-ui; docker-compose up -d
-cd storm-ui; docker-compose logs -f
+docker-compose logs

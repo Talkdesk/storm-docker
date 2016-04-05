@@ -10,4 +10,4 @@ else
 fi
 
 cd storm-supervisor; docker-compose up -d
-cd storm-supervisor; docker-compose logs -f
+docker-compose logs
