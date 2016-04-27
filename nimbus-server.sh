@@ -4,9 +4,9 @@ then
 	echo "Everything is installed already."
 else
 	sh install.sh
-	docker build -t="talkdesk/storm:0.10.0" storm
-	docker build -t="talkdesk/storm-nimbus:0.10.0" storm-nimbus
-	docker build -t="talkdesk/storm-ui:0.10.0" storm-ui
+	docker build -t="talkdesk/storm:1.0.0" storm
+	docker build -t="talkdesk/storm-nimbus:1.0.0" storm-nimbus
+	docker build -t="talkdesk/storm-ui:1.0.0" storm-ui
 	touch SETUP_OK
 fi
 
