@@ -7,6 +7,8 @@ EXPOSE 6702
 EXPOSE 6703
 EXPOSE 8000
 EXPOSE 5555
+EXPOSE 10514
+EXPOSE 22
 
 RUN /usr/bin/config-supervisord.sh supervisor
 RUN /usr/bin/config-supervisord.sh logviewer
