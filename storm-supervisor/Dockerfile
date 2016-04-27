@@ -1,4 +1,4 @@
-FROM talkdesk/storm:0.10.0
+FROM talkdesk/storm:1.0.0
 MAINTAINER Wurstmeister
 
 EXPOSE 6700

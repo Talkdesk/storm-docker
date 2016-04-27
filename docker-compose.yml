@@ -1,0 +1,31 @@
+zookeeper:
+  image: talkdesk/zookeeper:3.4.8
+  ports: 
+    - "49181:2181"
+    - "22"
+nimbus:
+  image: talkdesk/storm-nimbus:1.0.0
+  ports:
+    - "49773:3773"
+    - "49772:3772"
+    - "49627:6627"
+    - "22"
+  links: 
+    - zookeeper:zk
+supervisor:
+  image: talkdesk/storm-supervisor:1.0.0
+  ports:
+    - "8000"
+    - "5555:5555"
+    - "22"
+  links: 
+    - nimbus:nimbus
+    - zookeeper:zk
+ui:
+  image: talkdesk/storm-ui:1.0.0
+  ports:
+    - "49080:8080"
+    - "22"
+  links: 
+    - nimbus:nimbus
+    - zookeeper:zk

@@ -1,12 +1,12 @@
 nimbus:
-  image: talkdesk/storm-nimbus:0.10.0
+  image: talkdesk/storm-nimbus:1.0.0
   ports:
     - "3773:3773"
     - "3772:3772"
     - "6627:6627"
     - "22"
 ui:
-  image: talkdesk/storm-ui:0.10.0
+  image: talkdesk/storm-ui:1.0.0
   ports:
     - "8080:8080"
     - "22"
