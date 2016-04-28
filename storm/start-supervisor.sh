@@ -27,8 +27,10 @@ function valid_ip()
     return $stat
 }
 
-if valid_ip $nimbus_ip; then nimbus_ip_parsed=$nimbus_ip; else nimbus_ip_parsed=`host $nimbus_ip | awk '{ print $4 }'`; fi
-if valid_ip $zookeeper_ip; then zookeeper_ip_parsed=$zookeeper_ip; else zookeeper_ip_parsed=`host $zookeeper_ip | awk '{ print $4 }'`; fi
+#if valid_ip $nimbus_ip; then nimbus_ip_parsed=$nimbus_ip; else nimbus_ip_parsed=`host $nimbus_ip | awk '{ print $4 }'`; fi
+#if valid_ip $zookeeper_ip; then zookeeper_ip_parsed=$zookeeper_ip; else zookeeper_ip_parsed=`host $zookeeper_ip | awk '{ print $4 }'`; fi
+nimbus_ip_parsed=$nimbus_ip
+zookeeper_ip_parsed=$zookeeper_ip
 
 sed -i -e "s/%zookeeper%/$zookeeper_ip_parsed/g" $STORM_HOME/conf/storm.yaml
 sed -i -e "s/%nimbus%/$nimbus_ip_parsed/g" $STORM_HOME/conf/storm.yaml
