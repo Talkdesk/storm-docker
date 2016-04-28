@@ -1,5 +1,7 @@
-zookeeper_ip = "ec2-52-91-200-252.compute-1.amazonaws.com"
-nimbus_ip = "ec2-54-172-105-234.compute-1.amazonaws.com"
+#!/bin/bash
+zookeeper_ip="ec2-52-91-200-252.compute-1.amazonaws.com"
+nimbus_ip="ec2-54-172-105-234.compute-1.amazonaws.com"
+hostname_ip="ec2-54-172-105-234.compute-1.amazonaws.com"
 
 # Test an IP address for validity:
 # Usage:
@@ -30,7 +32,7 @@ sed -i -e "s/%nimbus%/$nimbus_ip/g" $STORM_HOME/conf/storm.yaml
 
 echo -e "\n"
 
-if valid_ip $nimbus_ip; then myhostname = $nimbus_ip; else myhostname = `host $nimbus_ip | awk '{ print $4 }'`; fi
+if valid_ip $nimbus_ip; then myhostname=$hostname_ip; else myhostname=`host $hostname_ip | awk '{ print $4 }'`; fi
 
 echo "storm.local.hostname: $myhostname" >> $STORM_HOME/conf/storm.yaml
 
