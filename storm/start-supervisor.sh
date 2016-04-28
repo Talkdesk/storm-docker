@@ -27,14 +27,17 @@ function valid_ip()
     return $stat
 }
 
-sed -i -e "s/%zookeeper%/$zookeeper_ip/g" $STORM_HOME/conf/storm.yaml
-sed -i -e "s/%nimbus%/$nimbus_ip/g" $STORM_HOME/conf/storm.yaml
+if valid_ip $nimbus_ip; then nimbus_ip_parsed=$nimbus_ip; else nimbus_ip_parsed=`host $nimbus_ip | awk '{ print $4 }'`; fi
+if valid_ip $zookeeper_ip; then zookeeper_ip_parsed=$zookeeper_ip; else zookeeper_ip_parsed=`host $zookeeper_ip | awk '{ print $4 }'`; fi
+
+sed -i -e "s/%zookeeper%/$zookeeper_ip_parsed/g" $STORM_HOME/conf/storm.yaml
+sed -i -e "s/%nimbus%/$nimbus_ip_parsed/g" $STORM_HOME/conf/storm.yaml
 
 echo -e "\n"
 
-if valid_ip $nimbus_ip; then myhostname=$hostname_ip; else myhostname=`host $hostname_ip | awk '{ print $4 }'`; fi
+if valid_ip $hostname_ip; then hostname_parsed=$hostname_ip; else hostname_parsed=`host $hostname_ip | awk '{ print $4 }'`; fi
 
-echo "storm.local.hostname: $myhostname" >> $STORM_HOME/conf/storm.yaml
+echo "storm.local.hostname: $hostname_parsed" >> $STORM_HOME/conf/storm.yaml
 
 echo "#########################################"
 cat $STORM_HOME/conf/storm.yaml
