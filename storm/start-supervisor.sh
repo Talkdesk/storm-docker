@@ -35,7 +35,9 @@ sed -i -e "s/%nimbus%/$nimbus_ip_parsed/g" $STORM_HOME/conf/storm.yaml
 
 echo -e "\n"
 
-if valid_ip $hostname_ip; then hostname_parsed=$hostname_ip; else hostname_parsed=`host $hostname_ip | awk '{ print $4 }'`; fi
+# It is not critical to solve the DNS for the hostname. So far it is only used for debugging and storm-ui purposes.
+# if valid_ip $hostname_ip; then hostname_parsed=$hostname_ip; else hostname_parsed=`host $hostname_ip | awk '{ print $4 }'`; fi
+hostname_parsed=$hostname_ip
 
 echo "storm.local.hostname: $hostname_parsed" >> $STORM_HOME/conf/storm.yaml
 
