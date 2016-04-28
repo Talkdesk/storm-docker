@@ -1,10 +1,8 @@
 storm.zookeeper.servers:
     - "%zookeeper%"
-nimbus.seeds: ["%nimbus%"]
 nimbus.host: "%nimbus%"
 nimbus.thrift.port: 6667
 drpc.servers:
   - "%nimbus%"
 drpc.port: 3772
 drpc.invocations.port: 3773
-storm.local.hostname: "%nimbus%"
