@@ -7,7 +7,7 @@ logging:
 server:
     applicationConnectors:
         - type: https
-          port: 8443
+          port: 10514
           keyStorePath: /dwstart.keystore
           trustStorePath: /cacerts
           keyStorePassword: crimson
