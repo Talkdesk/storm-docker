@@ -22,6 +22,10 @@ ADD cluster.xml $STORM_HOME/logback/cluster.xml
 ADD config-supervisord.sh /usr/bin/config-supervisord.sh
 ADD start-supervisor.sh /usr/bin/start-supervisor.sh 
 
+ADD cacerts /cacerts
+ADD config.yml /config.yml
+ADD dwstart.keystore /dwstart.keystore
+
 
 # # # # # # # # # # # # # # # # # # # # OPTIONAL
 # Installs ZeroMQ 4

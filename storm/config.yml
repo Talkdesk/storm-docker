@@ -1,0 +1,14 @@
+logging:
+  level: INFO
+  loggers:
+    com.javaeeeee: DEBUG
+
+#Server configuration.
+server:
+    applicationConnectors:
+        - type: https
+          port: 8443
+          keyStorePath: /dwstart.keystore
+          trustStorePath: /cacerts
+          keyStorePassword: crimson
+          validateCerts: false
