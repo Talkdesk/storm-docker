@@ -5,4 +5,6 @@ drpc.servers:
   - "%nimbus%"
 drpc.port: 3772
 drpc.invocations.port: 3773
+supervisor.memory.capacity.mb: 8192.0
+worker.heap.memory.mb: 1536
 
