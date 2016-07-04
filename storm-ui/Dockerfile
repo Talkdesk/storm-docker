@@ -1,5 +1,6 @@
 FROM talkdesk/storm:1.0.0
-MAINTAINER Wurstmeister
+MAINTAINER Talkdesk
+
 RUN /usr/bin/config-supervisord.sh ui
 
 EXPOSE 8080
