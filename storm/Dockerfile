@@ -1,11 +1,10 @@
-FROM ipricegroup/ubuntu-oracle-java-8
-ENV DEBIAN_FRONTEND noninteractive
+FROM java:8-jdk
 
 MAINTAINER Talkdesk 
 
 RUN apt-get update; apt-get install -y unzip wget supervisor docker.io openssh-server host
 RUN echo 'root:wurstmeister' | chpasswd
-# RUN mkdir /var/run/sshd
+RUN mkdir /var/run/sshd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 EXPOSE 22
