@@ -8,3 +8,16 @@ drpc.invocations.port: 3773
 supervisor.memory.capacity.mb: 8192.0
 worker.heap.memory.mb: 1536
 
+supervisor.slots.ports:
+    - 6700
+    - 6701
+    - 6702
+    - 6703
+    - 6704
+    - 6705
+    - 6706
+    - 6707
+    - 6708
+    - 6709
+    - 6710
+    - 6711
