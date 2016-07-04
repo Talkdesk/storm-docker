@@ -3,7 +3,36 @@ storm-docker
 
 Dockerfiles for building a storm cluster. Inspired by [https://github.com/wurstmeister/storm-docker](https://github.com/wurstmeister/storm-docker)
 
-##Pre-Requisites
+## Running on Linux 
+
+### Pre-requisites
+Install Docker engine following the [official tutorial](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
+
+### Go for it
+- Copy the repository files to the server:
+	`scp -r storm-docker/* ubuntu@<server>/storm-docker/`
+
+- Login into the server using `ssh`
+- cd into directory 
+	`cd storm-docker`
+
+- Build the base image
+	`docker build -t="talkdesk/storm:1.0.0" storm`
+	
+- Build the specific image, depending on the component you are installing:
+	- Supervisor: `docker build -t="talkdesk/storm-supervisor:1.0.0" storm-supervisor`
+	- Nimbus: `docker build -t="talkdesk/storm-nimbus:1.0.0" storm-nimbus`
+	- UI: `docker build -t="talkdesk/storm-ui:1.0.0" storm-ui` 
+	- Zookeeper: `docker build -t="talkdesk/zookeeper:3.4.8" zookeeper`	
+	
+- Run the container in deamon mode
+```docker run -d -h `hostname` <IMAGE_ID> ```
+	> ```-h `hostname```` is used to pass the host's hostname to the container so that it can be used by storm.
+
+
+## Running on Mac
+
+###Pre-Requisites
 
 - install docker-compose [http://docs.docker.com/compose/install/](http://docs.docker.com/compose/install/)
 

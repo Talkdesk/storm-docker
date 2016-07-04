@@ -1,7 +1,7 @@
 #!/bin/bash
 zookeeper_ip="ec2-52-91-200-252.compute-1.amazonaws.com"
 nimbus_ip="ec2-54-172-105-234.compute-1.amazonaws.com"
-hostname_ip="ec2-54-172-105-234.compute-1.amazonaws.com"
+hostname_ip=`hostname`.ec2.internal
 
 # Test an IP address for validity:
 # Usage:
