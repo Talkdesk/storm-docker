@@ -21,4 +21,6 @@ EXPOSE 22
 
 RUN /usr/bin/config-supervisord.sh supervisor
 RUN /usr/bin/config-supervisord.sh logviewer
-CMD /usr/bin/start-supervisor.sh
+CMD ([ ! -z "$ZOOKEEPER_HOST" ] || (echo "ZOOKEEPER_HOST env variable is not defined" && exit 1 )) \
+    && ([ ! -z "$NIMBUS_HOST" ] || (echo "NIMBUS_HOST env variable is not defined" && exit 1 )) \
+    && /usr/bin/start-supervisor.sh

@@ -9,4 +9,5 @@ EXPOSE 3772
 EXPOSE 3773
 EXPOSE 5555
 
-CMD /usr/bin/start-supervisor.sh
+CMD ([ ! -z "$ZOOKEEPER_HOST" ] || (echo "ZOOKEEPER_HOST env variable is not defined" && exit 1 )) \  
+    && /usr/bin/start-supervisor.sh

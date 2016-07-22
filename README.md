@@ -8,7 +8,7 @@ Dockerfiles for building a storm cluster. Inspired by [https://github.com/wurstm
 ### Pre-requisites
 Install Docker engine following the [official tutorial](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
 
-### Go for it
+### Building the containers
 - Copy the repository files to the server:
 	`scp -r storm-docker/* ubuntu@<server>/storm-docker/`
 
@@ -16,19 +16,34 @@ Install Docker engine following the [official tutorial](https://docs.docker.com/
 - cd into directory 
 	`cd storm-docker`
 
-- Build the base image
-	`docker build -t="talkdesk/storm:1.0.1" storm`
-	
-- Build the specific image, depending on the component you are installing:
-	- Supervisor: `docker build -t="talkdesk/storm-supervisor:1.0.1" storm-supervisor`
-	- Nimbus: `docker build -t="talkdesk/storm-nimbus:1.0.1" storm-nimbus`
-	- UI: `docker build -t="talkdesk/storm-ui:1.0.1" storm-ui` 
-	- Zookeeper: `docker build -t="talkdesk/zookeeper:3.4.8" zookeeper`	
-	
-- Run the container in deamon mode
-```docker run -d -h `hostname` <IMAGE_ID> ```
-	> ```-h `hostname```` is used to pass the host's hostname to the container so that it can be used by storm.
+- Build all the containers at once: `./rebuild.sh`
 
+	- You can also build the images step-by-step:
+		- Build the Storm base image:
+		 `docker build -t="talkdesk/storm:1.0.1" storm`
+		- Zookeeper: `docker build -t="talkdesk/zookeeper:3.4.8" zookeeper`
+	
+	- Build the Storm specific images, depending on the component you are installing:
+		- Supervisor: `docker build -t="talkdesk/storm-supervisor:1.0.1" storm-supervisor`
+		- Nimbus: `docker build -t="talkdesk/storm-nimbus:1.0.1" storm-nimbus`
+		- UI: `docker build -t="talkdesk/storm-ui:1.0.1" storm-ui` 
+			
+### Run without docker-compose (on production)
+- Run the container in deamon mode
+
+	```
+	$> docker run -d -h `hostname` --env-file <ENV_FILE> <IMAGE_ID> 
+	```
+	> ```-h `hostname` ``` is used to pass the host's hostname to the container so that it can be used by storm.
+	>
+	> ```<ENV_FILE>``` is the file containing environment variables required to run the containers (see `env-prod.sh`).
+
+### Run with docker-compose
+To run the containers using Docker Compose on a single host, just run the command
+
+```sh
+$> docker-compose up
+``` 
 
 ## Running on Mac
 
@@ -62,7 +77,7 @@ Add 3 more supervisors:
 Take a look at docker-compose.yml:
 
     ui:
-      image: talkdesk/storm-ui:0.10.0
+      image: talkdesk/storm-ui:1.0.1
 	      ports:
 	        - "49080:8080"
 
@@ -91,8 +106,4 @@ Following the example above, after discovering the nimbus host IP (could be loca
     storm jar target/your-topology-fat-jar.jar com.your.package.AndTopology topology-name -c nimbus.host=192.168.59.103 -c nimbus.thrift.port=49627
 
 ### How can I connect to one of the containers?
-Find the forwarded ssh port for the container you wish to connect to (use `docker-compose ps`)
-
-    $ ssh root@`boot2docker ip` -p $CONTAINER_PORT
-
-The password is 'wurstmeister' (from: https://registry.hub.docker.com/u/wurstmeister/base/dockerfile/).
+Run the command `$> docker exec -i<CONTAINER> bash`
