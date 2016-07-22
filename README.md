@@ -17,12 +17,12 @@ Install Docker engine following the [official tutorial](https://docs.docker.com/
 	`cd storm-docker`
 
 - Build the base image
-	`docker build -t="talkdesk/storm:1.0.0" storm`
+	`docker build -t="talkdesk/storm:1.0.1" storm`
 	
 - Build the specific image, depending on the component you are installing:
-	- Supervisor: `docker build -t="talkdesk/storm-supervisor:1.0.0" storm-supervisor`
-	- Nimbus: `docker build -t="talkdesk/storm-nimbus:1.0.0" storm-nimbus`
-	- UI: `docker build -t="talkdesk/storm-ui:1.0.0" storm-ui` 
+	- Supervisor: `docker build -t="talkdesk/storm-supervisor:1.0.1" storm-supervisor`
+	- Nimbus: `docker build -t="talkdesk/storm-nimbus:1.0.1" storm-nimbus`
+	- UI: `docker build -t="talkdesk/storm-ui:1.0.1" storm-ui` 
 	- Zookeeper: `docker build -t="talkdesk/zookeeper:3.4.8" zookeeper`	
 	
 - Run the container in deamon mode

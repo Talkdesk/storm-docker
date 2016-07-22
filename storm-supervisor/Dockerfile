@@ -1,4 +1,4 @@
-FROM talkdesk/storm:1.0.0
+FROM talkdesk/storm:1.0.1
 MAINTAINER Talkdesk
 
 EXPOSE 6700

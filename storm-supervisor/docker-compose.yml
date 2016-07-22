@@ -1,5 +1,5 @@
 supervisor:
-  image: talkdesk/storm-supervisor:1.0.0
+  image: talkdesk/storm-supervisor:1.0.1
   ports:
     - "8000:8000"
     - "6700:6700"

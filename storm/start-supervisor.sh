@@ -1,7 +1,7 @@
 #!/bin/bash
-zookeeper_ip="ec2-52-91-200-252.compute-1.amazonaws.com"
-nimbus_ip="ec2-54-172-105-234.compute-1.amazonaws.com"
-hostname_ip=`hostname`.ec2.internal
+zookeeper_ip=$ZOOKEEPER_HOST
+nimbus_ip=$NIMBUS_HOST
+hostname_ip=`hostname`$HOSTNAME_SUFFIX
 
 # Test an IP address for validity:
 # Usage:
@@ -47,4 +47,5 @@ echo "#########################################"
 cat $STORM_HOME/conf/storm.yaml
 echo "#########################################"
 
-/usr/sbin/sshd && supervisord
+#/usr/sbin/sshd && supervisord
+supervisord

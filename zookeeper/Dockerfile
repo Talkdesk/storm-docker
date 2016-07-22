@@ -7,8 +7,9 @@ RUN apk-install openjdk7-jre wget bash
 RUN mkdir /opt \
     && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz | tar -xzf - -C /opt \
     && mv /opt/zookeeper-3.4.8 /opt/zookeeper \
-    && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
+
+ADD zoo.cfg /opt/zookeeper/conf/zoo.cfg
  
 ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk
  
